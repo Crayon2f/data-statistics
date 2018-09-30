@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.sh.tech</groupId>
+    <artifactId>data-statistics</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>data-statistics-common</module>
+        <module>data-statistics-feign</module>
+        <module>data-statistics-web</module>
+        <module>data-statistics-eureka</module>
+        <module>big-data-display</module>
+    </modules>
+    <properties>
+        <!-- jdk -->
+        <java.version>1.8</java.version>
+        <!-- spring -->
+        <spring.cloud.version>Finchley.RELEASE</spring.cloud.version>
+        <spring.boot.version>2.0.5.RELEASE</spring.boot.version>
+        <!-- plugin-version -->
+        <maven.compiler.plugin.version>3.6.2</maven.compiler.plugin.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- 进行SpringCloud依赖包的导入处理 开始-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- 进行SpringCloud依赖包的导入处理 结束-->
+
+            <!-- SpringCloud离不开SpringBoot，所以必须要配置此依赖包 开始-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- SpringCloud离不开SpringBoot，所以必须要配置此依赖包 结束-->
+
+            <!--local project-->
+            <dependency>
+                <groupId>com.sh.tech</groupId>
+                <artifactId>data-statistics-feign</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sh.tech</groupId>
+                <artifactId>data-statistics-common</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+        </dependencies>
+
+    </dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>
